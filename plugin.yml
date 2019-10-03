@@ -1,0 +1,34 @@
+name: ydemetriades/github-buildstatus
+image: ydemetriades/cfstep-github-buildstatus
+tag: 0.0.1
+version: 0.0.1
+description: Update GitHub Commit State Build Status
+categories:
+- git
+keywords:
+- git
+- github
+- buildstatus
+- state
+sources:
+- https://github.com/ydemetriades/cfstep-github-buildstatus
+maintainers:
+- name: Yiannis Demetriades
+  email: yiannis.demetriades@gmail.com
+icon: https://raw.githubusercontent.com/ydemetriades/cfstep-github-buildstatus/master/icon.jpg
+envs:
+- name: GH_BSN_URL
+  type: optional
+  description: GitHub API Url. Can be used to point to GitHub Enterprise instead.
+- name: GH_BSN_REPO_AUTH_USER
+  type: required
+  description: GitHub API Authorization Username
+- name: GH_BSN_REPO_AUTH_TOKEN
+  type: required
+  description: GitHub API Authorization Token
+- name: CF_BUILD_STATUS
+  type: required
+  description: Build Status. Must be one of ['error', 'failure', 'pending', 'success']
+- name: GH_BSN_BUILD_CONTEXT
+  type: optional
+  description: Build context. eg. 'codefresh/ci' Default value is 'default'

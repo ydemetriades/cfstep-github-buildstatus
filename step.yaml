@@ -1,0 +1,109 @@
+kind: step-type
+version: '1.0'
+metadata:
+  name: ydemetriades/github-buildstatus
+  version: 0.0.1
+  isPublic: true
+  description: Update GitHub Commit State Build Status
+  sources:
+    - 'https://github.com/ydemetriades/cfstep-github-buildstatus'
+  stage: incubating
+  maintainers:
+    - name: Yiannis Demetriades
+      email: yiannis.demetriades@gmail.com
+  categories:
+    - git
+  official: false
+  tags: []
+  icon:
+    type: svg
+    url: https://cdn.jsdelivr.net/gh/ydemetriades/cfstep-github-buildstatus/icon.svg
+    background: "#f4f4f4"
+  examples:
+    - description: github-buildstatus-basic-example
+      workflow:
+        version: '1.0'
+        steps:
+          GH_Update_BuildStatus:
+            type: ydemetriades/github-buildstatus
+            arguments:
+              GH_BSN_REPO_AUTH_USER: ${{GH_BSN_REPO_AUTH_USER}}
+              GH_BSN_REPO_AUTH_TOKEN: ${{GH_BSN_REPO_AUTH_TOKEN}}
+              CF_BUILD_STATUS: ${{CF_BUILD_STATUS}}
+    - description: github-buildstatus-advanced-example
+      workflow:
+        version: '1.0'
+        mode: parallel
+        steps:
+           GH_Update_BuildStatus_Finished:
+            type: parallel
+            fail_fast: false
+            when:
+              condition:
+                all:
+                  myCondition: workflow.result == 'finished'
+            steps:
+              GH_Update_BuildStatus_Successful:
+                type: ydemetriades/github-buildstatus
+                when:
+                  condition:
+                    all:
+                      myCondition: workflow.result == 'success'
+                arguments:
+                  GH_BSN_REPO_AUTH_USER: ${{GH_BSN_REPO_AUTH_USER}}
+                  GH_BSN_REPO_AUTH_TOKEN: ${{GH_BSN_REPO_AUTH_TOKEN}}
+                  CF_BUILD_STATUS: 'SUCCESSFULL'
+              GH_Update_BuildStatus_Failed:
+                type: ydemetriades/github-buildstatus
+                when:
+                  condition:
+                    all:
+                      myCondition: workflow.result == 'failure'
+                arguments:
+                  GH_BSN_REPO_AUTH_USER: ${{GH_BSN_REPO_AUTH_USER}}
+                  GH_BSN_REPO_AUTH_TOKEN: ${{GH_BSN_REPO_AUTH_TOKEN}}
+                  CF_BUILD_STATUS: 'FAILED'
+spec:
+  arguments: |-
+    {
+        "definitions": {},
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "additionalProperties": false,
+        "patterns": [],
+        "required": [
+            "CF_BUILD_STATUS",
+            "GH_BSN_REPO_AUTH_USER",
+            "GH_BSN_REPO_AUTH_TOKEN"
+        ],
+        "properties": {
+            "GH_BSN_URL": {
+                "type": "string",
+                "description": "GitHub API Url. Can be used to point to GitHub Enterprise instead."
+            },
+            "GH_BSN_REPO_AUTH_USER": {
+                "type": "string",
+                "description": "GitHub API Authorization Username"
+            },
+            "GH_BSN_REPO_AUTH_TOKEN": {
+                "type": "string",
+                "description": "GitHub API Authorization Password"
+            },
+            "CF_BUILD_STATUS": {
+                "type": "string",
+                "description": "Build Status. Must be one of ['error', 'failure', 'pending', 'success']"
+            },
+            "GH_BSN_BUILD_CONTEXT": {
+                "type": "string",
+                "description": "Build context. eg. 'codefresh/ci' Default value is 'default'"
+            }
+        }
+    }
+  steps:
+    main:
+      name: ydemetriades/github-buildstatus
+      image: ydemetriades/cfstep-github-buildstatus
+      environment:
+        - GH_BSN_REPO_AUTH_USER=${{GH_BSN_REPO_AUTH_USER}}
+        - GH_BSN_REPO_AUTH_TOKEN=${{GH_BSN_REPO_AUTH_TOKEN}}
+        - CF_BUILD_STATUS=${{CF_BUILD_STATUS}}

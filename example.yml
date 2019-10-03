@@ -1,0 +1,9 @@
+version: '1.0'
+steps:
+  GH_Update_BuildStatus:
+    type: ydemetriades/github-buildstatus
+    arguments:
+      GH_BSN_REPO_AUTH_USER: ${{GH_BSN_REPO_AUTH_USER}}
+      GH_BSN_REPO_AUTH_TOKEN: ${{GH_BSN_REPO_AUTH_TOKEN}}
+      CF_BUILD_STATUS: 'success'
+      GH_BSN_BUILD_CONTEXT: 'codefresh-build/ci'

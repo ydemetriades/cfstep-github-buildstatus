@@ -1,0 +1,26 @@
+version: "1.0"
+steps:
+  Clone:
+    title: Running docker image
+    type: git-clone
+    repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
+    git: github
+    revision: '${{CF_REVISION}}'
+  BuildingDockerImage:
+    title: Building Docker Image
+    type: build
+    image_name: ydemetriades/cfstep-github-buildstatus
+    working_directory: ${{Clone}}
+    dockerfile: Dockerfile
+  PushingToDockerRegistry:
+    title: Pushing to Docker Registry
+    type: push
+    candidate: ${{BuildingDockerImage}}
+    tags:
+    - latest
+    - ${{CF_RELEASE_TAG}}
+    registry: dockerhub
+    when:
+      branch:
+        only:
+        - master
