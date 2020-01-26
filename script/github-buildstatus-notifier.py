@@ -24,6 +24,7 @@ cf_build_id = os.getenv('CF_BUILD_ID')
 cf_status = os.getenv('CF_BUILD_STATUS', 'pending') # 'error', 'failure', 'pending', 'success'
 cf_revision = os.getenv('CF_REVISION')
 cf_build_url = os.getenv('CF_BUILD_URL')
+description = os.getenv('GH_BSN_BUILD_DESCRIPTION', 'Build [{}]'.format(cf_build_id))
 context = os.getenv('GH_BSN_BUILD_CONTEXT', 'codefresh-ci')
 
 print('Will Attempt to update build status of commit [{}] to [{}] '.format(cf_revision, cf_status))
@@ -31,7 +32,7 @@ print('Will Attempt to update build status of commit [{}] to [{}] '.format(cf_re
 data = {
     'state': cf_status,
     'target_url': cf_build_url,
-    'description': 'Build [{}]'.format(cf_build_id),
+    'description': description,
     'context': context
 }
 

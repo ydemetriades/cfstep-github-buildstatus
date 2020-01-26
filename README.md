@@ -23,6 +23,7 @@ Both, Codefresh step and docker image, are configurable through parameters in or
 |CF_BUILD_STATUS|Yes|Build Status|`error` `failure` `pending` `success`|-|
 |GH_BSN_BUILD_CONTEXT|No|Build context. eg. 'codefresh/ci'|-|`default`|
 |CF_BUILD_URL|No|Build URL. can be used to link to another URL|-|Codefresh build URL|
+|GH_BSN_BUILD_DESCRIPTION|No|Status description|-|Build [{commit_hash}]|
 
 ### Example
 
