@@ -96,7 +96,11 @@ spec:
             "GH_BSN_BUILD_CONTEXT": {
                 "type": "string",
                 "description": "Build context. eg. 'codefresh/ci' Default value is 'default'"
-            }
+            },
+            "CF_BUILD_URL": {
+              "type": "string",
+              "description": "Build URL. can be used to link to another URL. Default is a link to the codefresh build"
+          }
         }
     }
   steps:
