@@ -5,5 +5,6 @@ steps:
     arguments:
       GH_BSN_REPO_AUTH_USER: ${{GH_BSN_REPO_AUTH_USER}}
       GH_BSN_REPO_AUTH_TOKEN: ${{GH_BSN_REPO_AUTH_TOKEN}}
+      GH_BSN_BUILD_DESCRIPTION: 'You did it!'
       CF_BUILD_STATUS: 'success'
       GH_BSN_BUILD_CONTEXT: 'codefresh-build/ci'

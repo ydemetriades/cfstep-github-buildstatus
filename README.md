@@ -22,6 +22,8 @@ Both, Codefresh step and docker image, are configurable through parameters in or
 |GH_BSN_REPO_AUTH_PASSWORD|Yes|GitHub Server API Authorization Password|-|-|
 |CF_BUILD_STATUS|Yes|Build Status|`error` `failure` `pending` `success`|-|
 |GH_BSN_BUILD_CONTEXT|No|Build context. eg. 'codefresh/ci'|-|`default`|
+|CF_BUILD_URL|No|Build URL. can be used to link to another URL|-|Codefresh build URL|
+|GH_BSN_BUILD_DESCRIPTION|No|Status description|-|Build [{commit_hash}]|
 
 ### Example
 
@@ -35,6 +37,7 @@ steps:
       GH_BSN_REPO_AUTH_TOKEN: ${{GH_BSN_REPO_AUTH_TOKEN}}
       CF_BUILD_STATUS: 'success'
       GH_BSN_BUILD_CONTEXT: 'codefresh-build/ci'
+      CF_BUILD_URL: 'http://myurl.com/build/{{CF_PULL_REQUEST_NUMBER}}'
 ```
 
 ### Advanced Example

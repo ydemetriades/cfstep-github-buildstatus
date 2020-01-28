@@ -96,7 +96,15 @@ spec:
             "GH_BSN_BUILD_CONTEXT": {
                 "type": "string",
                 "description": "Build context. eg. 'codefresh/ci' Default value is 'default'"
-            }
+            },
+            "CF_BUILD_URL": {
+              "type": "string",
+              "description": "Build URL. can be used to link to another URL. Default is a link to the codefresh build"
+          },
+            "GH_BSN_BUILD_DESCRIPTION": {
+              "type": "string",
+              "description": "Build Status description"
+          }
         }
     }
   steps:
@@ -107,3 +115,6 @@ spec:
         - GH_BSN_REPO_AUTH_USER=${{GH_BSN_REPO_AUTH_USER}}
         - GH_BSN_REPO_AUTH_TOKEN=${{GH_BSN_REPO_AUTH_TOKEN}}
         - CF_BUILD_STATUS=${{CF_BUILD_STATUS}}
+        - GH_BSN_BUILD_CONTEXT=${{GH_BSN_BUILD_CONTEXT}}
+        - GH_BSN_BUILD_DESCRIPTION=${{GH_BSN_BUILD_DESCRIPTION}}
+        - CF_BUILD_URL=${{CF_BUILD_URL}}

@@ -31,4 +31,7 @@ envs:
   description: Build Status. Must be one of ['error', 'failure', 'pending', 'success']
 - name: GH_BSN_BUILD_CONTEXT
   type: optional
-  description: Build context. eg. 'codefresh/ci' Default value is 'default'
+  description: Build context. eg. 'codefresh/ci' Default value is 'default'- 
+- name: GH_BSN_BUILD_DESCRIPTION
+  type: optional
+  description: Build status description
